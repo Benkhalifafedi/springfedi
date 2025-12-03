@@ -32,7 +32,6 @@ public class ClientController {
         if (c.getNom() == null || c.getNom().isBlank()) {
             throw new IllegalArgumentException("Le champ 'nom' est obligatoire.");
         }
-        // idClient: s'il est null, il sera attribué côté service (MAX+1 ou autre stratégie)
         return clientService.addClient(c);
     }
 
@@ -48,20 +47,17 @@ public class ClientController {
     }
 
     // ---------- Recherches ----------
-    // Keyword: par nom (contains, ignore case)
     @GetMapping("/search/nom")
     public List<Client> searchByNom(@RequestParam String q) {
         return clientService.searchByNom(q);
     }
 
-    // JPQL: inscrits après une date (format yyyy-MM-dd)
     @GetMapping("/search/after")
     public List<Client> registeredAfter(
             @RequestParam("d") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date d) {
         return clientService.searchRegisteredAfter(d);
     }
 
-    // JPQL: domaine email (ex: like=%@gmail.com)
     @GetMapping("/search/email-domain")
     public List<Client> byEmailDomain(@RequestParam String like) {
         return clientService.searchByEmailDomain(like);

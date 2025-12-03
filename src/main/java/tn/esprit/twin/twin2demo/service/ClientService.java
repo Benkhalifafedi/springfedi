@@ -57,10 +57,6 @@ public class ClientService implements IClientService {
         return List.of();
     }
 
-    // @Override
-    //public List<Client> searchRegisteredAfter(Date d) {
-       // return clientRepository.findRegisteredAfter(d);
-   // }
 
     @Override
     public List<Client> searchByEmailDomain(String domainLike) {

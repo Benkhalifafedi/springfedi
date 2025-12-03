@@ -13,7 +13,6 @@ public class MenuRestaurantController {
 
     private final IMenuRestaurantService menuRestaurantService;
 
-    // ✅ Constructeur explicite qui initialise le champ final
     public MenuRestaurantController(IMenuRestaurantService menuRestaurantService) {
         this.menuRestaurantService = menuRestaurantService;
     }
@@ -24,5 +23,4 @@ public class MenuRestaurantController {
         return menuRestaurantService.affecterRestaurantAChaineRestauration(nomRestaurant, libelleChaine);
     }
 
-    // tu pourras ajouter les autres endpoints ici
 }

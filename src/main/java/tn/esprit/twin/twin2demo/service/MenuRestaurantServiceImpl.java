@@ -23,7 +23,6 @@ public class MenuRestaurantServiceImpl implements IMenuRestaurantService {
     private final ClientRepository clientRepository;
     private final CommandeRepository commandeRepository;
 
-    // ✅ Constructeur explicite pour initialiser les champs final (remplace @RequiredArgsConstructor)
     public MenuRestaurantServiceImpl(RestaurantRepository restaurantRepository,
                                      ChaineRestaurationRepository chaineRestaurationRepository,
                                      MenuRepository menuRepository,
@@ -44,7 +43,6 @@ public class MenuRestaurantServiceImpl implements IMenuRestaurantService {
     @Override
     public Restaurant affecterRestaurantAChaineRestauration(String nomRestaurant, String libelleChaine) {
 
-        // 🔧 ICI : on utilise findByNom (et plus findByNomRestaurant)
         Restaurant restaurant = restaurantRepository.findByNom(nomRestaurant)
                 .orElseThrow(() -> new IllegalArgumentException("Restaurant introuvable : " + nomRestaurant));
 
@@ -68,7 +66,6 @@ public class MenuRestaurantServiceImpl implements IMenuRestaurantService {
 
         for (Menu m : menus) {
             m.setRestaurant(restaurant);
-            // prixTotal initialisé à 0
             m.setPrixTotal(BigDecimal.ZERO);
         }
 
@@ -121,16 +118,12 @@ public class MenuRestaurantServiceImpl implements IMenuRestaurantService {
             menu.setComposants(new HashSet<>());
         }
 
-        // Ajouter les composants au menu
         for (Composant c : composants) {
-            // si ton entité Composant n’a pas de setMenu(), on laisse juste la collection côté Menu
             menu.getComposants().add(c);
         }
 
-        // persister les composants (si pas de cascade)
         composantRepository.saveAll(composants);
 
-        // Calcul du prix total (en BigDecimal) = somme des prix des composants
         BigDecimal total = BigDecimal.ZERO;
         for (Composant c : menu.getComposants()) {
             if (c.getPrix() != null) {
@@ -138,7 +131,6 @@ public class MenuRestaurantServiceImpl implements IMenuRestaurantService {
             }
         }
 
-        // Le prix total du menu ne doit pas dépasser 20 dinars
         if (total.compareTo(BigDecimal.valueOf(20)) > 0) {
             throw new IllegalArgumentException("Le prix total du menu (" + total + " dt) dépasse 20 dt.");
         }
@@ -185,7 +177,6 @@ public class MenuRestaurantServiceImpl implements IMenuRestaurantService {
         commande.setTotal(totalCommande);
         commande.setTotalRemise(montantRemise);
 
-        // si la date n’est pas déjà mise, on met aujourd’hui
         if (commande.getDateCommande() == null) {
             commande.setDateCommande(LocalDate.now());
         }

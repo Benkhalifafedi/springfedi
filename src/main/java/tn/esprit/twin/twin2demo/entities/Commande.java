@@ -15,6 +15,9 @@ public class Commande implements Serializable {
     @Column(name = "id_commande")
     private Long idCommande;
 
+    @Column(name = "note")
+    private Integer note;
+
     @Column(name = "total", precision = 18, scale = 3)
     private BigDecimal total;
 
@@ -92,5 +95,14 @@ public class Commande implements Serializable {
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    // ✅ note en Integer partout
+    public Integer getNote() {
+        return note;
+    }
+
+    public void setNote(Integer note) {
+        this.note = note;
     }
 }

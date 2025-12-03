@@ -42,7 +42,6 @@ public class RestaurantService implements IRestaurantService {
 
     @Override
     public List<Restaurant> findByNomContaining(String keyword) {
-        // 🔧 méthode correcte
         return restaurantRepository.findByNomContainingIgnoreCase(keyword);
     }
 

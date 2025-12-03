@@ -10,7 +10,6 @@ import java.util.Date;
 public class Client implements Serializable {
 
     @Id
-    // pas d'@GeneratedValue: on gère l'id côté service (MAX+1)
     @Column(name = "id_client")
     private Long idClient;
 

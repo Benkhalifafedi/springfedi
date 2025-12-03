@@ -17,7 +17,6 @@ public class MenuAdvancedController {
 
     private final IMenuAdvancedService advancedService;
 
-    // 👇 constructeur explicite pour l’injection
     @Autowired
     public MenuAdvancedController(IMenuAdvancedService advancedService) {
         this.advancedService = advancedService;
