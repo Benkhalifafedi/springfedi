@@ -14,7 +14,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 
     List<Commande> findByDateCommandeBetweenOrderByNote(LocalDate dateCommandeAfter, LocalDate dateCommandeBefore);
 
-    // ✅ Requête explicite : client + menu
+    //  Requête explicite : client + menu
     @Query("SELECT c FROM Commande c " +
             "WHERE c.client.identifiant = :identifiant " +
             "AND c.menu.libelle = :libelleMenu")
